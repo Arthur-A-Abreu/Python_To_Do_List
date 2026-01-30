@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">My To-Do List 📝</h1>
+
+        <form method="POST">
+            <input type="text" name="task" placeholder="Digite uma tarefa" required>
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    {{ task["name"] }}
+                    <a href="/delete/{{ task['id'] }}" class="delete-button">X</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+
+</body>
+</html>
