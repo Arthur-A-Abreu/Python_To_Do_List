@@ -1,16 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
-#Cria o app
+#Create the Flask App
 app = Flask(__name__)
 
-#Função para conectar ao banco de dados
+#Function to get a database connection
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
 
-#Ciar tabela se não existir
+#Create the Database and the Table if not exists
 def init_db():
     conn = get_db_connection()
     conn.execute('''
@@ -26,7 +26,7 @@ init_db()
 print("Banco e tabela verificados")
 
 
-#Define uma rota
+#Define the route for the Home Page
 # GET and POST to do a Point Between the Client and the Server
 @app.route('/',methods=['GET', 'POST'])
 def home():
@@ -45,7 +45,7 @@ def home():
     return render_template('index.html', tasks=tasks)
 
 
-#Deletar tarefas
+#Delete the task
 @app.route("/delete/<int:id>")
 def delete_task(id):
     conn = get_db_connection()
@@ -80,3 +80,4 @@ def edit(id):
 if __name__ == '__main__':
 
     app.run(debug=True)
+
