@@ -71,6 +71,7 @@ ul {
 li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
     border-radius: 6px;
     background: #2a2a2a;
@@ -80,3 +81,25 @@ li {
 .delete-button:hover {
     color: #ff1744;
 }
+
+.back_button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+
+    background: #222;
+    color: #fff;
+    text-decoration: none;
+
+    border-radius: 20px;
+    font-size: 14px;
+
+    transition: background 0.2s, transform 0.2s;
+}
+
+.back_button:hover {
+    background: #000;
+    transform: translateX(-4px);
+}
+
+
