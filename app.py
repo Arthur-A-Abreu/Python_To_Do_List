@@ -54,5 +54,29 @@ def delete_task(id):
     conn.close()
     return redirect("/")
 
+#Edit the Task
+@app.route("/edit/<int:id>", methods=['GET', 'POST'])
+def edit(id):
+    conn = get_db_connection()
+
+    if request.method == 'POST':
+        new_name = request.form["task"]
+        conn.execute(
+            "UPDATE task SET name = ? WHERE id = ?",
+            (new_name, id)
+        )
+        conn.commit()
+        conn.close()
+        return redirect(url_for("home"))
+    
+    task = conn.execute(
+        "SELECT * FROM task WHERE id = ?",
+        (id,)  
+    ).fetchone()
+    conn.close()
+
+    return render_template("edit.html", task=task)
+
 if __name__ == '__main__':
+
     app.run(debug=True)
